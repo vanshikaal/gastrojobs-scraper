@@ -283,6 +283,14 @@ const crawler = new PlaywrightCrawler({
       await route.continue(); // let the original request proceed normally
     });
 
+    // Dismiss any modal blocking the button (e.g. job-alert signup popup)
+    await page.evaluate(() => {
+      document.querySelector('#jobfinderBox')?.remove();
+      document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+    });
+
     // Trigger first pagination to capture sei_id
     const nextBtn = await page.$('.js-next-page');
     if (!nextBtn) {
@@ -290,7 +298,8 @@ const crawler = new PlaywrightCrawler({
       return;
     }
 
-    await nextBtn.click();
+    // JS click bypasses any remaining overlay interception
+    await page.evaluate(() => document.querySelector('.js-next-page').click());
 
     // Wait for capturedPopupUrl to be set (max 5s)
     const deadline = Date.now() + 5000;
@@ -382,7 +391,15 @@ async function scrapePaginationByClicking(page, self, totalPages, startPage) {
     if (!nextBtn) break;
 
     const prevCount = await page.$$eval('.ycg-job-item', els => els.length);
-    await nextBtn.click();
+
+    // Dismiss modal before each click
+    await page.evaluate(() => {
+      document.querySelector('#jobfinderBox')?.remove();
+      document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+    });
+    await page.evaluate(() => document.querySelector('.js-next-page')?.click());
 
     // Wait for new cards to load
     await page.waitForFunction(
