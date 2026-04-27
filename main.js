@@ -278,9 +278,9 @@ const crawler = new PlaywrightCrawler({
     let capturedPopupUrl = null;
 
     await page.route('**/popup.php**', async (route) => {
-      const reqUrl = route.request().url();
-      if (!capturedPopupUrl) capturedPopupUrl = reqUrl;
-      await route.continue(); // let the original request proceed normally
+      // Capture full URL including SID and k tokens — required by server
+      if (!capturedPopupUrl) capturedPopupUrl = route.request().url();
+      await route.continue();
     });
 
     // Dismiss any modal blocking the button (e.g. job-alert signup popup)
@@ -345,7 +345,7 @@ const crawler = new PlaywrightCrawler({
         ...hiddenInputs,
       });
 
-      // POST from within page context — inherits live session/cookies
+      // POST from within page context — inherits live session/cookies + SID/k tokens
       const html = await page.evaluate(
         async ({ postUrl, body }) => {
           const r = await fetch(postUrl, {
@@ -357,10 +357,13 @@ const crawler = new PlaywrightCrawler({
             body,
             credentials: 'include',
           });
-          return r.text();
+          const json = await r.json();
+          // Response: { liste: "<html string of job cards>", site_number, number_of_pages, ... }
+          return json.liste || '';
         },
         {
-          postUrl: `${BASE_URL}/popup.php?sei_id=${seiId}`,
+          // Use full captured URL — includes SID and k tokens the server requires
+          postUrl: capturedPopupUrl.replace(/sei_id=\d+/, `sei_id=${seiId}`),
           body:    formData.toString(),
         }
       );
