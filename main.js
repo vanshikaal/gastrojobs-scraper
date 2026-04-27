@@ -77,6 +77,31 @@ async function extractSection(page, headingText) {
  * Structure: h2 > p (person) > p (phone) > p (email) > strong (company)
  *            > span.postalcode > div.job_section > a (email) > a (website)
  */
+/**
+ * Try multiple heading variants, return first match.
+ * Handles wide variation in German job posting heading styles.
+ */
+async function extractSectionMulti(page, headings) {
+  return page.evaluate((headingList) => {
+    const allH2 = Array.from(document.querySelectorAll('h2'));
+    for (const heading of headingList) {
+      const target = allH2.find(h =>
+        h.textContent.trim().replace(/:$/, '') === heading.replace(/:$/, '')
+      );
+      if (!target) continue;
+      const parts = [];
+      let el = target.nextElementSibling;
+      while (el && el.tagName !== 'H2') {
+        const text = el.textContent.trim();
+        if (text) parts.push(text);
+        el = el.nextElementSibling;
+      }
+      if (parts.length) return parts.join('\n').trim();
+    }
+    return null;
+  }, headings);
+}
+
 async function extractContact(page) {
   return page.evaluate(() => {
     const contactH2 = Array.from(document.querySelectorAll('h2'))
@@ -117,11 +142,25 @@ async function scrapeDetailPage(page, url) {
   const employment = await page.$eval('.meta_info_container span.employment', el => el.textContent.trim()).catch(() => null);
   const datePosted = await page.$eval('.meta_info_container span.date',       el => el.textContent.trim()).catch(() => null);
 
-  // Content sections (map German headings → English field names)
-  const intro   = await extractSection(page, 'Einleitung');
-  const tasks   = await extractSection(page, 'Ihre Aufgaben');
-  const reqs    = await extractSection(page, 'Ihr Profil');
-  const benefits= await extractSection(page, 'Wir bieten');
+  // Content sections — try multiple heading variants per field
+  // (employers use different German headings for the same content)
+  const intro   = await extractSectionMulti(page, [
+    'Einleitung', 'Über uns', 'Wir sind', 'Das sind wir'
+  ]);
+  const tasks   = await extractSectionMulti(page, [
+    'Ihre Aufgaben', 'Aufgaben', 'Das sind Ihre Aufgaben',
+    'Deine Aufgaben', 'Ihre Tätigkeiten', 'Aufgabenbereich'
+  ]);
+  const reqs    = await extractSectionMulti(page, [
+    'Ihr Profil', 'Das bringen Sie mit', 'Was wir von Ihnen erwarten:',
+    'Was wir von Ihnen erwarten', 'Ihr Profil:', 'Anforderungen',
+    'Das bringst du mit', 'Dein Profil', 'Voraussetzungen'
+  ]);
+  const benefits= await extractSectionMulti(page, [
+    'Wir bieten', 'Das bieten wir', 'Was wir Ihnen bieten:',
+    'Was wir Ihnen bieten', 'Wir bieten Ihnen', 'Ihre Vorteile',
+    'Benefits', 'Das bieten wir Ihnen', 'Deine Benefits'
+  ]);
 
   // Contact block
   const contact = await extractContact(page);
