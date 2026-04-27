@@ -298,6 +298,12 @@ const crawler = new PlaywrightCrawler({
     }
 
     // ── LISTING PAGE ─────────────────────────────────────────────────────────
+    // Guard: if redirected to wrong page, navigate to the correct search URL
+    const currentUrl = page.url();
+    if (currentUrl.includes('stellenangebote') || !currentUrl.includes('/jobs/')) {
+      console.log(`Redirected to wrong page: ${currentUrl} — forcing correct URL`);
+      await page.goto(START_URL, { waitUntil: 'domcontentloaded' });
+    }
     await page.waitForSelector('.ycg-job-item', { timeout: 20000 });
     const { jobLinks, totalJobs, hiddenInputs } = await extractListingData(page);
     const totalPages = Math.ceil(totalJobs / offersPerPage);
