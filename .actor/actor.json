@@ -5,6 +5,6 @@
   "description": "Scrapes all job postings from gastrojobs.de or hotelcareer.de (StepStone Group). Extracts every available field: title, company, location, employment type, intro, tasks, requirements, benefits, contact person, phone, email, address, website and more.",
   "version": "1.0.0",
   "buildTag": "latest",
-  "environmentVariables": [],
+  "environmentVariables": {},
   "dockerfile": "./Dockerfile"
 }
