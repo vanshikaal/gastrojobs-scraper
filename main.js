@@ -279,7 +279,7 @@ const crawler = new PlaywrightCrawler({
     },
   ],
 
-  requestHandlerTimeoutSecs: 60,
+  requestHandlerTimeoutSecs: 600,
   maxConcurrency,
 
   async requestHandler({ request, page, crawler: self }) {
