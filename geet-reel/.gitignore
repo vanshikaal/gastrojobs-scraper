@@ -1,0 +1,4 @@
+node_modules/
+.vo-tmp/
+out/*.png
+out/render.log
