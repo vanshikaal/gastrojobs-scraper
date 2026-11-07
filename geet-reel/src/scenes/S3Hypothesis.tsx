@@ -27,15 +27,15 @@ export const S3Hypothesis: React.FC = () => {
   const frame = useCurrentFrame();
   const c1 = cueAt("s3", 1);
   const c2 = cueAt("s3", 2);
-  const SLAM = c2 + 2;
-  const FREEZE = cueEnd("s3", 2) + 3;
+  const SLAM = S3_SLAM();
+  const FREEZE = SLAM + 12;
   const frozen = frame >= FREEZE;
   const f = Math.min(frame, FREEZE);
   const boil = boilOf(f);
   const sh = shake(frame, SLAM, 14, 30);
   const cardY = interpolate(frame, [0, 12], [1100, 0], { ...clamp, easing: (t) => 1 - Math.pow(1 - t, 3) });
   const cardRot = interpolate(frame, [0, 12], [8, -1.5], clamp);
-  const peek = ease(frame, FREEZE + 4, FREEZE + 12, 260, 0);
+  const peek = ease(frame, FREEZE + 1, FREEZE + 8, 260, 0);
 
   return (
     <AbsoluteFill>
@@ -55,24 +55,24 @@ export const S3Hypothesis: React.FC = () => {
               <Display x={540} y={400} size={70} spacing={4}>
                 HYPOTHESIS #01
               </Display>
-              {frame >= c1 ? (
-                <DrawPath d="M250 330 C 120 360 160 450 540 440 C 930 432 940 340 820 320 C 700 300 420 300 300 330" p={ease(frame, c1 + 2, c1 + 16)} w={7} color={C.coral} />
+              {frame >= c1 + 18 ? (
+                <DrawPath d="M250 330 C 120 360 160 450 540 440 C 930 432 940 340 820 320 C 700 300 420 300 300 330" p={ease(frame, c1 + 18, c1 + 32)} w={7} color={C.coral} />
               ) : null}
               <Anshuman
                 x={330}
                 y={1070}
                 scale={0.95}
                 expr={frame >= SLAM ? "sweat" : "confused"}
-                {...(frame >= 18 ? ANSH_POSES.scratch : ANSH_POSES.idle)}
-                headTilt={frame >= 18 ? 6 + Math.sin(f / 5) * 2 : 0}
+                {...(frame >= 12 ? ANSH_POSES.scratch : ANSH_POSES.idle)}
+                headTilt={frame >= 12 ? 6 + Math.sin(f / 5) * 2 : 0}
                 look={frame >= SLAM ? 1 : -0.4}
               />
-              <QMark frame={f} at={24} x={190} y={600} size={96} color={C.mustard} rot={-12} />
-              <QMark frame={f} at={30} x={470} y={560} size={70} color={C.coral} rot={14} />
-              <Field y={512} label="SUBJECT" value="Anshuman" frame={f} at={14} />
-              <Field y={656} label="CLAIM" value="my entire future" frame={f} at={24} />
-              <Field y={800} label="EVIDENCE" value="1 train ride" frame={f} at={34} />
-              <Field y={944} label="STATUS" value={frame >= SLAM ? "uh..." : "obviously true"} frame={f} at={44} color={frame >= SLAM ? C.red : C.ink} />
+              <QMark frame={f} at={12} x={190} y={600} size={96} color={C.mustard} rot={-12} />
+              <QMark frame={f} at={18} x={470} y={560} size={70} color={C.coral} rot={14} />
+              <Field y={512} label="SUBJECT" value="Anshuman" frame={f} at={6} />
+              <Field y={656} label="CLAIM" value="my entire future" frame={f} at={11} />
+              <Field y={800} label="EVIDENCE" value="1 train ride" frame={f} at={16} />
+              <Field y={944} label="STATUS" value={frame >= SLAM ? "uh..." : "obviously true"} frame={f} at={21} color={frame >= SLAM ? C.red : C.ink} />
             </g>
           </g>
           <Stamp frame={frame} at={SLAM} x={545} y={760} text="NOT VERIFIED" sub="INSUFFICIENT DATA" rotate={-13} size={98} color={C.red} />
@@ -88,7 +88,7 @@ export const S3Hypothesis: React.FC = () => {
               <Geet x={830} y={1600 + peek} scale={0.85} expr="shocked" {...POSES.cheeks} />
             </g>
             <path d="M560 1384 H1080" stroke={C.ink} strokeWidth={6} />
-            <Hand x={140} y={1300} size={50} rotate={-4} opacity={lin(frame, FREEZE + 10, FREEZE + 14)}>
+            <Hand x={140} y={1300} size={50} rotate={-4} opacity={lin(frame, FREEZE + 6, FREEZE + 9)}>
               *cricket noises*
             </Hand>
             <g opacity={lin(frame, FREEZE, FREEZE + 2)} transform="translate(130 1140)">
@@ -105,3 +105,6 @@ export const S3Hypothesis: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
+export const S3_SLAM = () => cueAt("s3", 2) + 2;
+export const _ce = cueEnd;

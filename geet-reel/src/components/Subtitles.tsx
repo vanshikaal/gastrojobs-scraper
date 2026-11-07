@@ -4,7 +4,7 @@ import { CUES, pop } from "../anim";
 import { C, FONT_DISPLAY } from "../theme";
 
 // Words that get a mustard highlight in the captions.
-const KEY = new Set(["prototype", "confirmed", "hypothesis,", "plan.", "prototyping", "test", "learning.", "heart.", "LDL", "massive", "smaller,", "visit", "APPROVED"]);
+const KEY = new Set(["Met.", "lecture.", "hypothesis,", "plan.", "prototyping", "experiments,", "assumptions", "conversation,", "experience", "matched.", "twist.", "prototype."]);
 
 /** Burned-in English subtitles, synced to src/timing.json, inside the mobile-safe zone. */
 export const Subtitles: React.FC = () => {

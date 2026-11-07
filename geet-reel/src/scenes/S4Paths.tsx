@@ -8,6 +8,7 @@ import { C } from "../theme";
 import { cloudPath } from "./S2Dream";
 
 type P = [number, number];
+const TITLE_Y = 330;
 const GS = 0.42;
 
 /** Parabolic hop from a to b between frames t0..t1. */
@@ -20,7 +21,7 @@ const Stone: React.FC<{ x: number; y: number; label: string; s: number; color: s
   <g transform={`translate(${x} ${y}) scale(${s})`}>
     <ellipse cx={0} cy={22} rx={112} ry={46} fill={C.inkSoft} stroke={C.ink} strokeWidth={6} />
     <ellipse cx={0} cy={0} rx={112} ry={44} fill={color} stroke={C.ink} strokeWidth={6} />
-    <Display x={0} y={16} size={46} spacing={2}>
+    <Display x={0} y={label.length > 6 ? 14 : 16} size={label.length > 6 ? 38 : 46} spacing={2}>
       {label}
     </Display>
   </g>
@@ -60,13 +61,13 @@ export const S4Paths: React.FC = () => {
 
   // --- right: stepping stones ---
   const stones: { p: P; label: string; at: number; color: string }[] = [
-    { p: [660, 1170], label: "TEST", at: c1 + 4, color: C.mustard },
-    { p: [860, 960], label: "LEARN", at: c1 + 16, color: C.coral },
-    { p: [680, 760], label: "DECIDE", at: c1 + 28, color: C.pink },
+    { p: [660, 1170], label: "TEST", at: c1 + 2, color: C.mustard },
+    { p: [860, 960], label: "LEARN", at: c1 + 9, color: C.coral },
+    { p: [680, 760], label: "REASSESS", at: c1 + 16, color: C.pink },
   ];
   const start: P = [840, 1340];
   const island: P = [600, 452];
-  const hops = [c1 + 34, c1 + 52, c1 + 70, c1 + 90];
+  const hops = [c1 + 22, c2 + 12, c3 + 2, c3 + 19];
   const pts: P[] = [start, ...stones.map((s) => s.p), island];
   let rp: P = start;
   let lastLand = -100;
@@ -84,6 +85,13 @@ export const S4Paths: React.FC = () => {
     <AbsoluteFill>
       <Stage boilSeed={boil}>
         <Paper />
+        <g transform={`translate(540 ${TITLE_Y}) rotate(-2) scale(${pop(frame, 4)})`} filter="url(#boil)">
+          <path d="M-405 -72 Q0 -86 405 -68 L397 20 Q0 34 -400 18 Z" fill={C.mustard} stroke={C.ink} strokeWidth={7} strokeLinejoin="round" />
+          <Display x={0} y={0} size={76} spacing={3}>
+            LIFE PROTOTYPING
+          </Display>
+        </g>
+        <g transform="translate(540 1390) scale(0.86) translate(-540 -1390)">
         {/* chasm + ledge */}
         <g filter="url(#boil)">
           <path d="M40 1180 H262 L280 1260 L262 1400 H40 Z" fill={C.paperDeep} stroke={C.ink} strokeWidth={7} strokeLinejoin="round" />
@@ -126,7 +134,7 @@ export const S4Paths: React.FC = () => {
           <g transform={`translate(800 640) rotate(4) scale(${pop(frame, c1)})`}>
             <rect x={-150} y={-46} width={300} height={80} rx={16} fill={C.mustard} stroke={C.ink} strokeWidth={7} />
             <Display x={0} y={18} size={52}>
-              PROTOTYPE
+              SMALL STEPS
             </Display>
           </g>
         </g>
@@ -192,26 +200,38 @@ export const S4Paths: React.FC = () => {
           ) : null}
         </g>
 
-        {/* kinetic text */}
+        {/* "learn before committing" */}
         <g filter="url(#boil)">
-          {frame >= c2 ? (
-            <g transform={`translate(290 870) rotate(-4) scale(${pop(frame, c2)})`}>
-              <Display x={0} y={0} size={56} color={C.ink} outline={C.white} ow={10}>
-                LESS GUESSING
-              </Display>
-              <Strike x1={-190} x2={190} y={-20} p={ease(frame, c2 + 6, c2 + 14)} />
-            </g>
-          ) : null}
           {frame >= c3 ? (
-            <g transform={`translate(290 990) rotate(3) scale(${pop(frame, c3)})`}>
-              <rect x={-200} y={-60} width={400} height={80} rx={14} fill={C.mustard} stroke={C.ink} strokeWidth={6} />
-              <Display x={0} y={0} size={56} color={C.ink}>
-                MORE LEARNING
-              </Display>
+            <g transform={`translate(290 930) rotate(-4) scale(${pop(frame, c3)})`}>
+              <rect x={-185} y={-70} width={370} height={150} rx={14} fill="#FFE27A" stroke={C.ink} strokeWidth={6} />
+              <Hand x={0} y={-12} size={56} anchor="middle">
+                learn first,
+              </Hand>
+              <Hand x={0} y={50} size={56} anchor="middle" color={C.coralDeep}>
+                then leap.
+              </Hand>
             </g>
           ) : null}
+        </g>
         </g>
       </Stage>
     </AbsoluteFill>
   );
+};
+
+/** Sound cues for this scene (scene-relative frames). */
+export const S4_BEATS = () => {
+  const c1 = cueAt("s4", 1);
+  const c2 = cueAt("s4", 2);
+  const c3 = cueAt("s4", 3);
+  return [
+    { at: 4, file: "pop", vol: 0.45 },
+    { at: 60, file: "whoosh", vol: 0.5 },
+    { at: c1 + 2, file: "pop", vol: 0.4 },
+    { at: c1 + 9, file: "pop", vol: 0.4 },
+    { at: c1 + 16, file: "pop", vol: 0.4 },
+    { at: c3, file: "pop", vol: 0.4 },
+    { at: c3 + 33, file: "ding", vol: 0.4 },
+  ];
 };

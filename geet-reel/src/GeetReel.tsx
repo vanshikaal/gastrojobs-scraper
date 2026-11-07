@@ -14,18 +14,17 @@ import { C } from "./theme";
 
 export type GeetReelProps = Record<string, unknown> & {
   /**
-   * "scratch": offline robotic guide voice (public/vo-scratch.wav) for timing review.
-   * "final":   your recorded / AI voiceover, saved as public/vo-final.wav (43 s, cues per src/timing.json).
-   * "none":    no narration (subtitles + SFX only).
+   * "none":  no narration (subtitles + SFX only) — the default.
+   * "final": your recorded / AI voiceover, saved as public/vo-final.wav, timed to subtitles.srt.
    */
-  voiceover: "scratch" | "final" | "none";
+  voiceover: "final" | "none";
   sfx: boolean;
   subtitles: boolean;
 };
 
 export const GeetReel: React.FC<GeetReelProps> = ({ voiceover, sfx, subtitles }) => (
   <AbsoluteFill style={{ backgroundColor: C.paper }}>
-    <Sequence from={SCENES.s1.from} durationInFrames={SCENES.s1.dur} name="1 · Train dash + title">
+    <Sequence from={SCENES.s1.from} durationInFrames={SCENES.s1.dur} name="1 · Jab We Met intro + lecture">
       <S1Train />
     </Sequence>
     <Sequence from={SCENES.s2.from} durationInFrames={SCENES.s2.dur} name="2 · Dream + APPROVED">
@@ -40,11 +39,10 @@ export const GeetReel: React.FC<GeetReelProps> = ({ voiceover, sfx, subtitles })
     <Sequence from={SCENES.s5.from} durationInFrames={SCENES.s5.dur} name="5 · LDL Geet universe">
       <S5LDL />
     </Sequence>
-    <Sequence from={SCENES.s6.from} durationInFrames={SCENES.s6.dur} name="6 · Both Geets + end card">
+    <Sequence from={SCENES.s6.from} durationInFrames={SCENES.s6.dur} name="6 · Plot twist interrupted + end card">
       <S6Ending />
     </Sequence>
     {subtitles ? <Subtitles /> : null}
-    {voiceover === "scratch" ? <Audio src={staticFile("vo-scratch.wav")} /> : null}
     {voiceover === "final" ? <Audio src={staticFile("vo-final.wav")} /> : null}
     {sfx
       ? SFX.map((s, i) => (

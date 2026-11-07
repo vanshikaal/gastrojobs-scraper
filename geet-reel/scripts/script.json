@@ -1,11 +1,89 @@
 {
   "fps": 30,
+  "rate": 180,
   "scenes": [
-    {"id": "s1", "start": 0,  "end": 4,  "cues": ["Geet had main character energy.", "She just needed prototype energy."]},
-    {"id": "s2", "start": 4,  "end": 11, "cues": ["She imagined an entire future with Anshuman,", "and treated that imagination", "like a confirmed plan."]},
-    {"id": "s3", "start": 11, "end": 17, "cues": ["The problem?", "Anshuman was a hypothesis,", "not a plan."], "pauses": [0.7, 0.35]},
-    {"id": "s4", "start": 17, "end": 25, "cues": ["Life prototyping means testing a big decision", "with a smaller, lower-risk experiment first.", "Less guessing,", "more learning."]},
-    {"id": "s5", "start": 25, "end": 36, "cues": ["So instead of immediately running away,", "LDL Geet could ask the hard questions,", "visit without committing,", "and see if this future actually works."]},
-    {"id": "s6", "start": 36, "end": 43, "cues": ["Geet didn't need less heart.", "She needed one small test", "before one massive leap."], "pauses": [0.45, 0.15]}
+    {
+      "id": "s1",
+      "minDur": 5.8,
+      "tail": 0.5,
+      "cues": [
+        "We all love Geet from Jab We Met.",
+        "But I think we can agree,",
+        "girl desperately needed",
+        "a Life Design Lab lecture."
+      ],
+      "pauses": [
+        0.3,
+        0.12,
+        0.05
+      ]
+    },
+    {
+      "id": "s2",
+      "minDur": 4.4,
+      "tail": 0.25,
+      "cues": [
+        "She planned to run away and marry Anshuman,",
+        "convinced she had her future figured out."
+      ]
+    },
+    {
+      "id": "s3",
+      "minDur": 3.6,
+      "tail": 0.9,
+      "cues": [
+        "Except...",
+        "Anshuman was a hypothesis,",
+        "not a plan."
+      ],
+      "pauses": [
+        0.35,
+        0.2
+      ]
+    },
+    {
+      "id": "s4",
+      "minDur": 7.6,
+      "tail": 0.4,
+      "cues": [
+        "Life prototyping is about exploring a possible future",
+        "through small experiments,",
+        "so you can test assumptions",
+        "and learn before committing."
+      ],
+      "pauses": [
+        0.08,
+        0.15,
+        0.1
+      ]
+    },
+    {
+      "id": "s5",
+      "minDur": 8.8,
+      "tail": 0.5,
+      "cues": [
+        "Geet could've started with a prototype conversation,",
+        "tried a low-stakes experience together,",
+        "and discovered if their plans actually matched."
+      ],
+      "pauses": [
+        0.35,
+        0.3
+      ]
+    },
+    {
+      "id": "s6",
+      "minDur": 6.4,
+      "tail": 1.1,
+      "cues": [
+        "Turns out, not every life decision",
+        "needs a dramatic Bollywood plot twist.",
+        "Sometimes, it just needs a prototype."
+      ],
+      "pauses": [
+        0.05,
+        0.35
+      ]
+    }
   ]
 }

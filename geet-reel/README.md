@@ -1,50 +1,50 @@
-# Geet Needed Life Prototyping — 43 s vertical reel
+# Geet Needed Life Prototyping — ~40 s vertical reel
 
 An animated Instagram reel built in [Remotion](https://remotion.dev) (React).
-It runs 1080×1920 at 30 fps: 1290 frames, exactly 43.0 s.
+It runs 1080×1920 (9:16) at 30 fps: 1195 frames, 39.83 s.
+
+Scene lengths are **generated** from the voiceover script, so the edit, the subtitles and the cue-driven animation beats always stay in sync.
 
 ## Storyboard → code
 
-| Time | Frames | Scene file | What happens |
-|---|---|---|---|
-| 0–4 s | 0–119 | `src/scenes/S1Train.tsx` | Geet sprints for the train, energy meters (100% vs 3%), leaps, then a freeze frame with the title |
-| 4–11 s | 120–329 | `src/scenes/S2Dream.tsx` | Thought bubble with wedding bells, a mandap, a house and FOREVER. A giant stamp lands APPROVED, and a sticky note reads "approved by: Geet / reviewed by: Geet" |
-| 11–17 s | 330–509 | `src/scenes/S3Hypothesis.tsx` | Anshuman on a HYPOTHESIS #01 index card, then a NOT VERIFIED stamp. Freeze: PAUSED, *cricket noises*, Geet peeks up in horror |
-| 17–25 s | 510–749 | `src/scenes/S4Paths.tsx` | Split screen. COMMIT is one giant leap (she falls in). PROTOTYPE is TEST → LEARN → DECIDE stones (she arrives) |
-| 25–36 s | 750–1079 | `src/scenes/S5LDL.tsx` | Plan A "run away at night" gets a NOPE stamp. Portal to the LDL universe, where LDL Geet has tiny glasses and a clipboard. Then a split-screen call, "Visit ≠ Move in" with a return ticket, and the plan updated to v2 |
-| 36–43 s | 1080–1289 | `src/scenes/S6Ending.tsx` | Both Geets side by side (oversized heart vs tiny checklist). End card: "Prototype first. Commit better." |
+| Time | Scene file | What happens |
+|---|---|---|
+| 0.0–6.7 s | `src/scenes/S1Train.tsx` | A JAB WE MET film strip, "starring: Geet", a MAIN CHARACTER ENERGY meter. Geet dashes for the train, then a freeze frame and PROTOTYPE ENERGY 3%. A LIFE DESIGN LAB chalkboard and podium drop in, with an ATTENDANCE COMPULSORY stamp |
+| 6.7–11.5 s | `src/scenes/S2Dream.tsx` | Thought bubble: an "elope!!" train, a mandap with "her boyfriend", bells, a house. APPROVED stamp, plus the "approved by: Geet" sticky note |
+| 11.5–15.6 s | `src/scenes/S3Hypothesis.tsx` | HYPOTHESIS #01 card, then NOT VERIFIED. A punchline beat: PAUSED, *cricket noises*, Geet's horrified peek |
+| 15.6–23.6 s | `src/scenes/S4Paths.tsx` | LIFE PROTOTYPING. COMMIT (one giant leap, she falls) vs SMALL STEPS: TEST → LEARN → REASSESS. Sticky note: "learn first, then leap." |
+| 23.6–32.4 s | `src/scenes/S5LDL.tsx` | LDL universe. ① PROTOTYPE CONVERSATION (an honest talk; his answer surprises her). ② PROTOTYPE EXPERIENCE (a weekend together, no wedding). MY PLAN: I assumed → I learned → plan v2, stamped REASSESSED, "(no crystal ball. just better info.)" |
+| 32.4–39.8 s | `src/scenes/S6Ending.tsx` | An over-the-top plot twist (DUN. DUN. DUNNN., PLOT TWIST!!), then a record scratch as LDL Geet strolls in with a tiny checklist: "small test first?" End card: TEST. LEARN. THEN DECIDE. |
 
 Shared pieces:
-- `src/components/Geet.tsx` and `Anshuman.tsx`: rigged vector characters. Arm and leg joint angles, expressions, squash and stretch, dupatta flutter.
-- `src/components/Doodles.tsx`: arrows that draw on, rubber stamps, hearts, bubbles, sparkles, strike-throughs.
-- `src/components/Defs.tsx`: paper texture, floral salwar print, and the "line boil" filter that gives the hand-drawn jitter.
-- `src/components/Subtitles.tsx`: burned-in captions inside the mobile-safe zone (y 1395–1560).
+- `src/components/Geet.tsx` and `Anshuman.tsx`: rigged vector characters.
+- `src/components/Doodles.tsx`: arrows, stamps, bubbles and so on.
+- `src/components/Defs.tsx`: paper texture and the "line boil" filter.
+- `src/components/Subtitles.tsx`: burned-in captions in the mobile-safe zone.
 
-## Voiceover and subtitles
+## Voiceover, subtitles, timing
 
-`scripts/script.json` holds the exact narration, split into subtitle cues per scene.
-`node scripts/build-timing.mjs --scratch-vo` does three things:
-- writes `src/timing.json` (the cue frames that drive subtitles and some animation beats)
-- writes `subtitles.srt`
-- writes `public/vo-scratch.wav`
+The narration lives in `scripts/script.json`. `node scripts/build-timing.mjs` estimates each line's length at a natural ~180 wpm, then writes two files:
+- `src/timing.json`: scene lengths and cue frames
+- `subtitles.srt`
 
-The scratch voice is an offline espeak-ng/MBROLA voice, for timing only. It sounds robotic and is **not** a final voiceover.
+The estimate comes from an offline speech engine whose audio is only measured, never embedded. **The render contains no narration**, only the synthesised SFX (whoosh, pop, stamp thump, bell, ding, crickets) from `public/sfx`.
 
-To add a real voiceover:
-1. Record or generate it to match the cue times in `subtitles.srt`. Each line starts at its cue time.
-2. Save it as `public/vo-final.wav`, 43 s long.
+To add a recorded voiceover:
+1. Read each line at the start time given in `subtitles.srt`.
+2. Save it as `public/vo-final.wav`.
 3. Render with `--props='{"voiceover":"final","sfx":true,"subtitles":true}'`.
 
-`voiceover: "none"` renders subtitles and SFX only. The SFX (whoosh, pop, stamp thump, bell, ding, crickets) are synthesised with ffmpeg into `public/sfx/`.
+If your read runs longer or shorter, edit `scripts/script.json` (`rate`, `pauses`, `minDur`, `tail`) and rerun the script. Everything re-times automatically.
 
 ## Commands
 
 ```bash
 npm install
 npm run studio          # live preview / editing
-npx remotion render GeetReel out/reel.mp4 --crf=18 --props='{"voiceover":"scratch","sfx":true,"subtitles":true}'
+node scripts/build-timing.mjs     # after changing the script
+npx remotion render GeetReel out/geet-needed-life-prototyping.mp4 --crf=18
 ```
 
 In a sandbox without Remotion's own Chrome download, add
 `--browser-executable=/path/to/chrome-headless-shell --timeout=180000`.
-The paper/boil SVG filters make each frame fairly heavy, so the longer timeout helps.

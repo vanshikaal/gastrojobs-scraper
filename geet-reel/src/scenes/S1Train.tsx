@@ -1,12 +1,12 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
-import { clamp, ease, lin, pop } from "../anim";
-import { Burst, Display, Hand, Puff, Sparkle, SpeedLines } from "../components/Doodles";
+import { clamp, cueAt, ease, lin, pop, shake } from "../anim";
+import { Burst, Display, Hand, Heart, Puff, Sparkle, SpeedLines, Stamp } from "../components/Doodles";
 import { Paper, Stage, boilOf } from "../components/Defs";
 import { Geet, runPose } from "../components/Geet";
 import { C } from "../theme";
 
-export const FREEZE_S1 = 74;
+const FREEZE_S1 = cueAt("s1", 1) + 10;
 const GROUND = 1290;
 
 const Train: React.FC<{ x: number; t: number }> = ({ x, t }) => (
@@ -65,6 +65,53 @@ const Meter: React.FC<{ y: number; label: string; fill: number; color: string; f
   );
 };
 
+/** Doodled film strip naming the movie (plain text, no film branding). */
+const FilmStrip: React.FC<{ s: number }> = ({ s }) => (
+  <g transform={`translate(540 330) rotate(-2) scale(${s})`}>
+    <rect x={-400} y={-62} width={800} height={124} rx={10} fill={C.ink} />
+    {[...Array(13)].map((_, i) => (
+      <g key={i}>
+        <rect x={-380 + i * 60} y={-52} width={30} height={16} rx={4} fill={C.paper} />
+        <rect x={-380 + i * 60} y={36} width={30} height={16} rx={4} fill={C.paper} />
+      </g>
+    ))}
+    <Display x={0} y={22} size={64} color={C.white} spacing={6}>
+      JAB WE MET
+    </Display>
+  </g>
+);
+
+const Chalkboard: React.FC<{ y: number }> = ({ y }) => (
+  <g transform={`translate(540 ${y}) rotate(-1.5)`}>
+    <line x1={-250} y1={-260} x2={-300} y2={-170} stroke={C.ink} strokeWidth={5} />
+    <line x1={250} y1={-260} x2={300} y2={-170} stroke={C.ink} strokeWidth={5} />
+    <rect x={-410} y={-170} width={820} height={330} rx={20} fill="#A9683E" stroke={C.ink} strokeWidth={8} />
+    <rect x={-385} y={-148} width={770} height={286} rx={10} fill="#2F4A3E" stroke={C.ink} strokeWidth={5} />
+    <Display x={0} y={-62} size={62} color={C.white} spacing={4}>
+      LIFE DESIGN LAB
+    </Display>
+    <Hand x={0} y={20} size={58} anchor="middle" color={C.mustard}>
+      Lecture 1: Life Prototyping
+    </Hand>
+    <path d="M-160 50 Q0 66 160 46" stroke={C.white} strokeWidth={5} fill="none" strokeLinecap="round" opacity={0.7} />
+    <rect x={250} y={112} width={70} height={18} rx={4} fill={C.white} stroke={C.ink} strokeWidth={3} />
+  </g>
+);
+
+const Podium: React.FC<{ x: number }> = ({ x }) => (
+  <g transform={`translate(${x} ${GROUND})`}>
+    <path d="M-110 0 L-90 -250 H90 L110 0 Z" fill="#C98B55" stroke={C.ink} strokeWidth={7} strokeLinejoin="round" />
+    <path d="M-130 -250 H130 L115 -290 H-115 Z" fill="#A9683E" stroke={C.ink} strokeWidth={7} strokeLinejoin="round" />
+    <rect x={-60} y={-190} width={120} height={56} rx={8} fill={C.mustard} stroke={C.ink} strokeWidth={5} />
+    <Display x={0} y={-148} size={36}>
+      LDL
+    </Display>
+    {/* the apple for the teacher */}
+    <circle cx={60} cy={-312} r={22} fill={C.red} stroke={C.ink} strokeWidth={5} />
+    <path d="M60 -334 q4 -12 14 -14" stroke={C.ink} strokeWidth={4} fill="none" />
+  </g>
+);
+
 export const S1Train: React.FC = () => {
   const frame = useCurrentFrame();
   const f = Math.min(frame, FREEZE_S1);
@@ -73,17 +120,25 @@ export const S1Train: React.FC = () => {
 
   // Geet's dash toward the train, then a leap that freezes mid-air.
   const run = runPose(f * 0.52);
-  const gx = interpolate(f, [0, 60, FREEZE_S1], [-170, 330, 420], { ...clamp });
-  const jump = ease(f, 58, FREEZE_S1, 0, 1);
-  const lift = Math.sin(jump * Math.PI * 0.62) * 70;
-  const leaping = f >= 60;
+  const gx = interpolate(f, [0, FREEZE_S1 - 14, FREEZE_S1], [-170, 330, 420], { ...clamp });
+  const jump = ease(f, FREEZE_S1 - 16, FREEZE_S1, 0, 1);
+  const lift = Math.sin(jump * Math.PI * 0.62) * 45;
+  const leaping = f >= FREEZE_S1 - 14;
   const zoom = frozen ? 1 + 0.05 * ease(frame, FREEZE_S1, FREEZE_S1 + 10) : 1;
   const flash = frozen ? interpolate(frame, [FREEZE_S1, FREEZE_S1 + 7], [0.9, 0], clamp) : 0;
-  const meterOut = lin(frame, 66, 74, 1, 0);
+  const c2 = cueAt("s1", 2);
+  const c3 = cueAt("s1", 3);
+  const STAMP = c3 + 16;
+  const meterOut = lin(frame, FREEZE_S1 - 6, FREEZE_S1, 1, 0);
+  const lowOut = lin(frame, c3 - 2, c3 + 4, 1, 0);
+  const boardY = interpolate(frame, [c3, c3 + 9, c3 + 13], [-400, 470, 450], clamp);
+  const podiumX = interpolate(frame, [c3 + 4, c3 + 12], [1300, 860], { ...clamp, easing: (t) => 1 - Math.pow(1 - t, 3) });
+  const sh = shake(frame, STAMP, 12, 20);
 
   return (
     <AbsoluteFill>
       <Stage boilSeed={boil}>
+        <g transform={`translate(${sh.x} ${sh.y})`}>
         <g transform={`translate(540 960) scale(${zoom}) translate(-540 -960)`}>
           <Paper />
           {/* platform */}
@@ -120,7 +175,7 @@ export const S1Train: React.FC = () => {
             <Geet
               x={gx}
               y={GROUND - lift + (leaping ? 0 : run.bob)}
-              expr={frozen ? "happy" : "determined"}
+              expr={frame >= STAMP ? "shocked" : frozen ? "happy" : "determined"}
               legL={leaping ? [48, 20] : run.legL}
               legR={leaping ? [-40, -95] : run.legR}
               armL={leaping ? [70, 120] : run.armL}
@@ -138,36 +193,41 @@ export const S1Train: React.FC = () => {
           </g>
         </g>
 
-        {/* energy meters (pre-freeze) */}
+        {/* movie context + main character energy (pre-freeze) */}
         {meterOut > 0 ? (
           <g opacity={meterOut} filter="url(#boil)">
-            <Meter y={330} label="MAIN CHARACTER ENERGY" fill={1} color={C.coral} frame={frame} at={8} />
-            <Meter y={500} label="PROTOTYPE ENERGY" fill={0.03} color={C.coral} frame={frame} at={40} low />
-            {frame > 52 ? (
-              <Hand x={560} y={640} size={48} rotate={-3} opacity={lin(frame, 52, 56)}>
-                (uh oh.)
-              </Hand>
+            <FilmStrip s={pop(frame, 3)} />
+            {frame >= 14 ? (
+              <g opacity={lin(frame, 14, 18)}>
+                <Hand x={520} y={455} size={50} anchor="middle" color={C.coralDeep}>
+                  starring: Geet
+                </Hand>
+                <Heart x={690} y={440} size={34} scale={pop(frame, 18)} />
+              </g>
             ) : null}
+            <Meter y={560} label="MAIN CHARACTER ENERGY" fill={1} color={C.coral} frame={frame} at={30} />
           </g>
         ) : null}
 
-        {/* freeze-frame title */}
-        {frozen ? (
-          <g filter="url(#boil)">
-            <Display x={540} y={400} size={112} color={C.ink} scale={pop(frame, FREEZE_S1 + 2)} rotate={-3} spacing={2}>
-              GEET NEEDED
-            </Display>
-            <Display x={540} y={520} size={120} color={C.coral} outline={C.ink} ow={14} scale={pop(frame, FREEZE_S1 + 7)} rotate={2}>
-              LIFE
-            </Display>
-            <g transform={`translate(540 640) scale(${pop(frame, FREEZE_S1 + 12)}) rotate(-2)`}>
-              <path d="M-420 -96 Q0 -116 420 -92 L412 12 Q0 28 -414 10 Z" fill={C.mustard} stroke={C.ink} strokeWidth={7} strokeLinejoin="round" />
-              <Display x={0} y={-2} size={118} color={C.ink}>
-                PROTOTYPING
-              </Display>
-            </g>
+        {/* "girl desperately needed..." */}
+        {frame >= c2 && lowOut > 0 ? (
+          <g opacity={lowOut} filter="url(#boil)">
+            <Meter y={360} label="PROTOTYPE ENERGY" fill={0.03} color={C.coral} frame={frame} at={c2} low />
+            <Hand x={560} y={510} size={50} rotate={-3} opacity={lin(frame, c2 + 12, c2 + 16)}>
+              (uh oh.)
+            </Hand>
           </g>
         ) : null}
+
+        {/* "...a Life Design Lab lecture." */}
+        {frame >= c3 ? (
+          <g filter="url(#boil)">
+            <Chalkboard y={boardY} />
+            <Podium x={podiumX} />
+            <Stamp frame={frame} at={STAMP} x={700} y={640} text="ATTENDANCE" sub="COMPULSORY" rotate={-9} size={64} color={C.red} />
+          </g>
+        ) : null}
+        </g>
         {frozen ? (
           <rect x={18} y={18} width={1044} height={1884} rx={30} fill="none" stroke={C.ink} strokeWidth={14} opacity={ease(frame, FREEZE_S1, FREEZE_S1 + 4)} />
         ) : null}

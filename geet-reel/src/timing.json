@@ -1,139 +1,171 @@
 {
   "fps": 30,
-  "durationInFrames": 1290,
+  "durationInFrames": 1195,
+  "scenes": [
+    {
+      "id": "s1",
+      "from": 0,
+      "dur": 201
+    },
+    {
+      "id": "s2",
+      "from": 201,
+      "dur": 144
+    },
+    {
+      "id": "s3",
+      "from": 345,
+      "dur": 124
+    },
+    {
+      "id": "s4",
+      "from": 469,
+      "dur": 239
+    },
+    {
+      "id": "s5",
+      "from": 708,
+      "dur": 264
+    },
+    {
+      "id": "s6",
+      "from": 972,
+      "dur": 223
+    }
+  ],
   "cues": [
     {
       "scene": "s1",
-      "text": "Geet had main character energy.",
-      "from": 6,
-      "to": 52,
-      "showUntil": 58
+      "text": "We all love Geet from Jab We Met.",
+      "from": 5,
+      "to": 56,
+      "showUntil": 65
     },
     {
       "scene": "s1",
-      "text": "She just needed prototype energy.",
-      "from": 58,
-      "to": 109,
-      "showUntil": 118
+      "text": "But I think we can agree,",
+      "from": 65,
+      "to": 106,
+      "showUntil": 110
+    },
+    {
+      "scene": "s1",
+      "text": "girl desperately needed",
+      "from": 110,
+      "to": 143,
+      "showUntil": 145
+    },
+    {
+      "scene": "s1",
+      "text": "a Life Design Lab lecture.",
+      "from": 145,
+      "to": 186,
+      "showUntil": 199
     },
     {
       "scene": "s2",
-      "text": "She imagined an entire future with Anshuman,",
-      "from": 126,
-      "to": 199,
-      "showUntil": 205
-    },
-    {
-      "scene": "s2",
-      "text": "and treated that imagination",
+      "text": "She planned to run away and marry Anshuman,",
       "from": 205,
-      "to": 253,
-      "showUntil": 260
+      "to": 275,
+      "showUntil": 279
     },
     {
       "scene": "s2",
-      "text": "like a confirmed plan.",
-      "from": 260,
-      "to": 300,
-      "showUntil": 318
+      "text": "convinced she had her future figured out.",
+      "from": 279,
+      "to": 337,
+      "showUntil": 343
     },
     {
       "scene": "s3",
-      "text": "The problem?",
-      "from": 336,
-      "to": 358,
+      "text": "Except...",
+      "from": 349,
+      "to": 365,
       "showUntil": 376
     },
     {
       "scene": "s3",
       "text": "Anshuman was a hypothesis,",
-      "from": 379,
-      "to": 425,
-      "showUntil": 435
+      "from": 376,
+      "to": 417,
+      "showUntil": 423
     },
     {
       "scene": "s3",
       "text": "not a plan.",
-      "from": 435,
-      "to": 456,
-      "showUntil": 474
+      "from": 423,
+      "to": 442,
+      "showUntil": 457
     },
     {
       "scene": "s4",
-      "text": "Life prototyping means testing a big decision",
-      "from": 516,
-      "to": 597,
-      "showUntil": 604
+      "text": "Life prototyping is about exploring a possible future",
+      "from": 474,
+      "to": 560,
+      "showUntil": 562
     },
     {
       "scene": "s4",
-      "text": "with a smaller, lower-risk experiment first.",
-      "from": 604,
-      "to": 677,
-      "showUntil": 684
+      "text": "through small experiments,",
+      "from": 562,
+      "to": 603,
+      "showUntil": 608
     },
     {
       "scene": "s4",
-      "text": "Less guessing,",
-      "from": 684,
-      "to": 705,
-      "showUntil": 712
+      "text": "so you can test assumptions",
+      "from": 608,
+      "to": 656,
+      "showUntil": 659
     },
     {
       "scene": "s4",
-      "text": "more learning.",
+      "text": "and learn before committing.",
+      "from": 659,
+      "to": 696,
+      "showUntil": 706
+    },
+    {
+      "scene": "s5",
+      "text": "Geet could've started with a prototype conversation,",
       "from": 712,
-      "to": 731,
-      "showUntil": 748
+      "to": 785,
+      "showUntil": 796
     },
     {
       "scene": "s5",
-      "text": "So instead of immediately running away,",
-      "from": 756,
-      "to": 815,
-      "showUntil": 821
+      "text": "tried a low-stakes experience together,",
+      "from": 796,
+      "to": 854,
+      "showUntil": 863
     },
     {
       "scene": "s5",
-      "text": "LDL Geet could ask the hard questions,",
-      "from": 821,
-      "to": 895,
-      "showUntil": 901
-    },
-    {
-      "scene": "s5",
-      "text": "visit without committing,",
-      "from": 901,
-      "to": 937,
-      "showUntil": 944
-    },
-    {
-      "scene": "s5",
-      "text": "and see if this future actually works.",
-      "from": 944,
-      "to": 1014,
-      "showUntil": 1032
+      "text": "and discovered if their plans actually matched.",
+      "from": 863,
+      "to": 931,
+      "showUntil": 946
     },
     {
       "scene": "s6",
-      "text": "Geet didn't need less heart.",
-      "from": 1086,
-      "to": 1130,
-      "showUntil": 1143
+      "text": "Turns out, not every life decision",
+      "from": 976,
+      "to": 1031,
+      "showUntil": 1033
     },
     {
       "scene": "s6",
-      "text": "She needed one small test",
-      "from": 1143,
-      "to": 1191,
-      "showUntil": 1195
+      "text": "needs a dramatic Bollywood plot twist.",
+      "from": 1033,
+      "to": 1090,
+      "showUntil": 1101
     },
     {
       "scene": "s6",
-      "text": "before one massive leap.",
-      "from": 1195,
-      "to": 1234,
-      "showUntil": 1252
+      "text": "Sometimes, it just needs a prototype.",
+      "from": 1101,
+      "to": 1162,
+      "showUntil": 1177
     }
   ]
 }
