@@ -1,36 +1,36 @@
 {
   "fps": 30,
-  "durationInFrames": 1195,
+  "durationInFrames": 1320,
   "scenes": [
     {
       "id": "s1",
       "from": 0,
-      "dur": 201
+      "dur": 225
     },
     {
       "id": "s2",
-      "from": 201,
-      "dur": 144
+      "from": 225,
+      "dur": 168
     },
     {
       "id": "s3",
-      "from": 345,
-      "dur": 124
+      "from": 393,
+      "dur": 142
     },
     {
       "id": "s4",
-      "from": 469,
-      "dur": 239
+      "from": 535,
+      "dur": 267
     },
     {
       "id": "s5",
-      "from": 708,
-      "dur": 264
+      "from": 802,
+      "dur": 271
     },
     {
       "id": "s6",
-      "from": 972,
-      "dur": 223
+      "from": 1073,
+      "dur": 247
     }
   ],
   "cues": [
@@ -38,134 +38,134 @@
       "scene": "s1",
       "text": "We all love Geet from Jab We Met.",
       "from": 5,
-      "to": 56,
-      "showUntil": 65
+      "to": 61,
+      "showUntil": 73
     },
     {
       "scene": "s1",
       "text": "But I think we can agree,",
-      "from": 65,
-      "to": 106,
-      "showUntil": 110
+      "from": 73,
+      "to": 117,
+      "showUntil": 123
     },
     {
       "scene": "s1",
       "text": "girl desperately needed",
-      "from": 110,
-      "to": 143,
-      "showUntil": 145
+      "from": 123,
+      "to": 159,
+      "showUntil": 162
     },
     {
       "scene": "s1",
       "text": "a Life Design Lab lecture.",
-      "from": 145,
-      "to": 186,
-      "showUntil": 199
+      "from": 162,
+      "to": 207,
+      "showUntil": 222
     },
     {
       "scene": "s2",
       "text": "She planned to run away and marry Anshuman,",
-      "from": 205,
-      "to": 275,
-      "showUntil": 279
+      "from": 229,
+      "to": 305,
+      "showUntil": 316
     },
     {
       "scene": "s2",
       "text": "convinced she had her future figured out.",
-      "from": 279,
-      "to": 337,
-      "showUntil": 343
+      "from": 316,
+      "to": 378,
+      "showUntil": 391
     },
     {
       "scene": "s3",
       "text": "Except...",
-      "from": 349,
-      "to": 365,
-      "showUntil": 376
+      "from": 398,
+      "to": 415,
+      "showUntil": 428
     },
     {
       "scene": "s3",
       "text": "Anshuman was a hypothesis,",
-      "from": 376,
-      "to": 417,
-      "showUntil": 423
+      "from": 428,
+      "to": 473,
+      "showUntil": 481
     },
     {
       "scene": "s3",
       "text": "not a plan.",
-      "from": 423,
-      "to": 442,
-      "showUntil": 457
+      "from": 481,
+      "to": 502,
+      "showUntil": 517
     },
     {
       "scene": "s4",
       "text": "Life prototyping is about exploring a possible future",
-      "from": 474,
-      "to": 560,
-      "showUntil": 562
+      "from": 539,
+      "to": 632,
+      "showUntil": 637
     },
     {
       "scene": "s4",
       "text": "through small experiments,",
-      "from": 562,
-      "to": 603,
-      "showUntil": 608
+      "from": 637,
+      "to": 681,
+      "showUntil": 688
     },
     {
       "scene": "s4",
       "text": "so you can test assumptions",
-      "from": 608,
-      "to": 656,
-      "showUntil": 659
+      "from": 688,
+      "to": 740,
+      "showUntil": 744
     },
     {
       "scene": "s4",
       "text": "and learn before committing.",
-      "from": 659,
-      "to": 696,
-      "showUntil": 706
+      "from": 744,
+      "to": 784,
+      "showUntil": 799
     },
     {
       "scene": "s5",
       "text": "Geet could've started with a prototype conversation,",
-      "from": 712,
-      "to": 785,
-      "showUntil": 796
+      "from": 807,
+      "to": 886,
+      "showUntil": 900
     },
     {
       "scene": "s5",
       "text": "tried a low-stakes experience together,",
-      "from": 796,
-      "to": 854,
-      "showUntil": 863
+      "from": 900,
+      "to": 963,
+      "showUntil": 975
     },
     {
       "scene": "s5",
       "text": "and discovered if their plans actually matched.",
-      "from": 863,
-      "to": 931,
-      "showUntil": 946
+      "from": 975,
+      "to": 1049,
+      "showUntil": 1064
     },
     {
       "scene": "s6",
       "text": "Turns out, not every life decision",
-      "from": 976,
-      "to": 1031,
-      "showUntil": 1033
+      "from": 1077,
+      "to": 1136,
+      "showUntil": 1141
     },
     {
       "scene": "s6",
       "text": "needs a dramatic Bollywood plot twist.",
-      "from": 1033,
-      "to": 1090,
-      "showUntil": 1101
+      "from": 1141,
+      "to": 1203,
+      "showUntil": 1218
     },
     {
       "scene": "s6",
       "text": "Sometimes, it just needs a prototype.",
-      "from": 1101,
-      "to": 1162,
-      "showUntil": 1177
+      "from": 1218,
+      "to": 1285,
+      "showUntil": 1300
     }
   ]
 }

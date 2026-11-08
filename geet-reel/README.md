@@ -1,7 +1,7 @@
-# Geet Needed Life Prototyping — ~40 s vertical reel
+# Geet Needed Life Prototyping — 44 s vertical reel
 
 An animated Instagram reel built in [Remotion](https://remotion.dev) (React).
-It runs 1080×1920 (9:16) at 30 fps: 1195 frames, 39.83 s.
+It runs 1080×1920 (9:16) at 30 fps: 1320 frames, 44.00 s.
 
 Scene lengths are **generated** from the voiceover script, so the edit, the subtitles and the cue-driven animation beats always stay in sync.
 
@@ -9,12 +9,12 @@ Scene lengths are **generated** from the voiceover script, so the edit, the subt
 
 | Time | Scene file | What happens |
 |---|---|---|
-| 0.0–6.7 s | `src/scenes/S1Train.tsx` | A JAB WE MET film strip, "starring: Geet", a MAIN CHARACTER ENERGY meter. Geet dashes for the train, then a freeze frame and PROTOTYPE ENERGY 3%. A LIFE DESIGN LAB chalkboard and podium drop in, with an ATTENDANCE COMPULSORY stamp |
-| 6.7–11.5 s | `src/scenes/S2Dream.tsx` | Thought bubble: an "elope!!" train, a mandap with "her boyfriend", bells, a house. APPROVED stamp, plus the "approved by: Geet" sticky note |
-| 11.5–15.6 s | `src/scenes/S3Hypothesis.tsx` | HYPOTHESIS #01 card, then NOT VERIFIED. A punchline beat: PAUSED, *cricket noises*, Geet's horrified peek |
-| 15.6–23.6 s | `src/scenes/S4Paths.tsx` | LIFE PROTOTYPING. COMMIT (one giant leap, she falls) vs SMALL STEPS: TEST → LEARN → REASSESS. Sticky note: "learn first, then leap." |
-| 23.6–32.4 s | `src/scenes/S5LDL.tsx` | LDL universe. ① PROTOTYPE CONVERSATION (an honest talk; his answer surprises her). ② PROTOTYPE EXPERIENCE (a weekend together, no wedding). MY PLAN: I assumed → I learned → plan v2, stamped REASSESSED, "(no crystal ball. just better info.)" |
-| 32.4–39.8 s | `src/scenes/S6Ending.tsx` | An over-the-top plot twist (DUN. DUN. DUNNN., PLOT TWIST!!), then a record scratch as LDL Geet strolls in with a tiny checklist: "small test first?" End card: TEST. LEARN. THEN DECIDE. |
+| 0.0–7.5 s | `src/scenes/S1Train.tsx` | A JAB WE MET film strip, "starring: Geet", a MAIN CHARACTER ENERGY meter. Geet dashes for the train, then a freeze frame and PROTOTYPE ENERGY 3%. A LIFE DESIGN LAB chalkboard and podium drop in, with an ATTENDANCE COMPULSORY stamp |
+| 7.5–13.1 s | `src/scenes/S2Dream.tsx` | Thought bubble: an "elope!!" train, a mandap with "her boyfriend", bells, a house. APPROVED stamp, plus the "approved by: Geet" sticky note |
+| 13.1–17.8 s | `src/scenes/S3Hypothesis.tsx` | HYPOTHESIS #01 card, then NOT VERIFIED. A punchline beat: PAUSED, *cricket noises*, Geet's horrified peek |
+| 17.8–26.7 s | `src/scenes/S4Paths.tsx` | LIFE PROTOTYPING. COMMIT (one giant leap, she falls) vs SMALL STEPS: TEST → LEARN → REASSESS. Sticky note: "learn first, then leap." |
+| 26.7–35.8 s | `src/scenes/S5LDL.tsx` | LDL universe. ① PROTOTYPE CONVERSATION (an honest talk; his answer surprises her). ② PROTOTYPE EXPERIENCE (a weekend together, no wedding). MY PLAN: I assumed → I learned → plan v2, stamped REASSESSED, "(no crystal ball. just better info.)" |
+| 35.8–44.0 s | `src/scenes/S6Ending.tsx` | An over-the-top plot twist (DUN. DUN. DUNNN., PLOT TWIST!!), then a record scratch as LDL Geet strolls in with a tiny checklist: "small test first?" End card: TEST. LEARN. THEN DECIDE. |
 
 Shared pieces:
 - `src/components/Geet.tsx` and `Anshuman.tsx`: rigged vector characters.
@@ -24,7 +24,7 @@ Shared pieces:
 
 ## Voiceover, subtitles, timing
 
-The narration lives in `scripts/script.json`. `node scripts/build-timing.mjs` estimates each line's length at a natural ~180 wpm, then writes two files:
+The narration lives in `scripts/script.json`. `node scripts/build-timing.mjs` estimates each line's length at a relaxed ~168 wpm with generous pauses, then writes two files:
 - `src/timing.json`: scene lengths and cue frames
 - `subtitles.srt`
 
