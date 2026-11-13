@@ -19,12 +19,10 @@ export type GeetReelProps = Record<string, unknown> & {
    */
   voiceover: "final" | "none";
   sfx: boolean;
-  /** Original synthesised score (public/music.wav, made by scripts/make-music.py). */
-  music: boolean;
   subtitles: boolean;
 };
 
-export const GeetReel: React.FC<GeetReelProps> = ({ voiceover, sfx, music, subtitles }) => (
+export const GeetReel: React.FC<GeetReelProps> = ({ voiceover, sfx, subtitles }) => (
   <AbsoluteFill style={{ backgroundColor: C.paper }}>
     <Sequence from={SCENES.s1.from} durationInFrames={SCENES.s1.dur} name="1 · Jab We Met intro + lecture">
       <S1Train />
@@ -46,7 +44,6 @@ export const GeetReel: React.FC<GeetReelProps> = ({ voiceover, sfx, music, subti
     </Sequence>
     {subtitles ? <Subtitles /> : null}
     {voiceover === "final" ? <Audio src={staticFile("vo-final.wav")} /> : null}
-    {music ? <Audio src={staticFile("music.wav")} volume={voiceover === "final" ? 0.28 : 0.5} /> : null}
     {sfx
       ? SFX.map((s, i) => (
           <Sequence key={i} from={s.at} durationInFrames={60} name={`sfx ${s.file}`}>

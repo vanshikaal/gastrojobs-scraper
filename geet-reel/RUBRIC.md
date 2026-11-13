@@ -31,7 +31,7 @@ Reel: *Geet Needed Life Prototyping*, 44 s, 1080×1920. Timestamps refer to `out
 - **Accessibility**: the movie context is explained on screen; there's one idea per scene, short captions and labelled visuals.
 
 ## 5. Storytelling Presentation & Expression
-- **Music written to the edit**: a playful loop through the setup, a dead cut on NOT VERIFIED so the punchline lands in silence, a glockenspiel lift for LDL Geet, tremolo melodrama for the plot twist, a record scratch, and a resolving chord on the end card.
+- **Sound used for timing**: silence lets each joke breathe, *cricket noises* fill the NOT VERIFIED freeze, and a record scratch cuts off the Bollywood melodrama.
 - **SFX on every key action**: stamp thumps, whooshes on transitions, pops on reveals, wedding bells, crickets.
 - **Subtitles**: burned in, synced to the narration, with key terms highlighted, kept inside Instagram's safe zone (`subtitles.srt` is included).
 - **Pacing & transitions**: freeze frames and comedic pauses, snap-zooms (DUN. DUN. DUNNN.), slide and portal transitions, squash-and-stretch animation.
