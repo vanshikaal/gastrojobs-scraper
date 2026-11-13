@@ -106,8 +106,8 @@ export const S4Paths: React.FC = () => {
             <Heart x={471} y={420} size={22} shine={false} />
             <line x1={690} y1={452} x2={690} y2={340} stroke={C.ink} strokeWidth={6} />
             <path d="M692 342 L760 360 L692 380 Z" fill={C.red} stroke={C.ink} strokeWidth={4} strokeLinejoin="round" />
-            <Hand x={540} y={575} size={46} anchor="middle">
-              the future
+            <Hand x={540} y={575} size={42} anchor="middle">
+              a possible future
             </Hand>
           </g>
         </g>

@@ -5,7 +5,7 @@
     {
       "id": "s1",
       "minDur": 3.0,
-      "tail": 0.6,
+      "tail": 0.3,
       "cues": [
         "We all love Geet from Jab We Met.",
         "But I think we can agree,",
@@ -13,27 +13,27 @@
         "a Life Design Lab lecture."
       ],
       "pauses": [
-        0.4,
-        0.2,
+        0.3,
+        0.15,
         0.1
       ]
     },
     {
       "id": "s2",
       "minDur": 3.0,
-      "tail": 0.5,
+      "tail": 0.25,
       "cues": [
         "She planned to run away and marry Anshuman,",
         "convinced she had her future figured out."
       ],
       "pauses": [
-        0.35
+        0.3
       ]
     },
     {
       "id": "s3",
       "minDur": 3.0,
-      "tail": 1.1,
+      "tail": 0.95,
       "cues": [
         "Except...",
         "Anshuman was a hypothesis,",
@@ -47,7 +47,7 @@
     {
       "id": "s4",
       "minDur": 3.0,
-      "tail": 0.6,
+      "tail": 0.4,
       "cues": [
         "Life prototyping is about exploring a possible future",
         "through small experiments,",
@@ -55,37 +55,39 @@
         "and learn before committing."
       ],
       "pauses": [
-        0.15,
-        0.25,
-        0.15
+        0.1,
+        0.2,
+        0.12
       ]
     },
     {
       "id": "s5",
       "minDur": 3.0,
-      "tail": 0.8,
+      "tail": 0.5,
       "cues": [
         "Geet could've started with a prototype conversation,",
         "tried a low-stakes experience together,",
         "and discovered if their plans actually matched."
       ],
       "pauses": [
-        0.45,
-        0.4
+        0.3,
+        0.27
       ]
     },
     {
       "id": "s6",
       "minDur": 3.0,
-      "tail": 1.17,
+      "tail": 1.07,
       "cues": [
         "Turns out, not every life decision",
         "needs a dramatic Bollywood plot twist.",
-        "Sometimes, it just needs a prototype."
+        "Sometimes, it just needs a prototype.",
+        "So... what's your Anshuman?"
       ],
       "pauses": [
-        0.15,
-        0.5
+        0.1,
+        0.4,
+        0.45
       ]
     }
   ]

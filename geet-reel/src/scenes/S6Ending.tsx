@@ -10,7 +10,8 @@ import { MiniClipboard } from "./S5LDL";
 const beats = () => {
   const c1 = cueAt("s6", 1);
   const c2 = cueAt("s6", 2);
-  return { c1, c2, DUN: [c1 + 4, c1 + 16, c1 + 28], INTERRUPT: c2 - 6, END: c2 + 32 };
+  const c3 = cueAt("s6", 3);
+  return { c1, c2, c3, DUN: [c1 + 4, c1 + 16, c1 + 28], INTERRUPT: c2 - 6, END: c2 + 32, YOURS: c3 - 2 };
 };
 
 /** Zig-zag lightning bolt. */
@@ -27,7 +28,7 @@ const Bolt: React.FC<{ x: number; y: number; s: number; rot?: number }> = ({ x, 
 
 export const S6Ending: React.FC = () => {
   const frame = useCurrentFrame();
-  const { c1, c2, DUN, INTERRUPT, END } = beats();
+  const { c1, c2, DUN, INTERRUPT, END, YOURS } = beats();
   const drama = frame < INTERRUPT;
   // after the interruption the drama freezes (no more boil on it) and fades away
   const boil = boilOf(frame);
@@ -45,6 +46,7 @@ export const S6Ending: React.FC = () => {
   const gx = interpolate(ease(frame, INTERRUPT + 4, INTERRUPT + 16), [0, 1], [540, 300]);
   const lx = interpolate(ease(frame, INTERRUPT + 2, INTERRUPT + 22, 0, 1, (t) => 1 - Math.pow(1 - t, 2)), [0, 1], [1350, 780]);
   const walk = Math.sin(frame * 0.5);
+  const charS = interpolate(ease(frame, YOURS, YOURS + 10), [0, 1], [1, 0.74]);
   const wind = Math.sin(frame / 2.2);
 
   return (
@@ -73,7 +75,7 @@ export const S6Ending: React.FC = () => {
             <Geet
               x={gx}
               y={1285}
-              scale={0.95}
+              scale={0.95 * charS}
               expr={drama ? (frame >= c1 ? "shocked" : "worried") : frame < INTERRUPT + 14 ? "shocked" : "smile"}
               blink={!drama && frame >= INTERRUPT + 14 && frame < INTERRUPT + 18}
               {...(drama ? (frame >= c1 ? POSES.cheeks : { armL: [150, 165] as [number, number], armR: [150, 165] as [number, number] }) : POSES.idle)}
@@ -85,7 +87,7 @@ export const S6Ending: React.FC = () => {
               <Geet
                 x={lx}
                 y={1285 + (lx > 790 ? -Math.abs(walk) * 8 : 0)}
-                scale={0.95}
+                scale={0.95 * charS}
                 glasses
                 expr="smile"
                 legL={lx > 790 ? [walk * 18, walk * 18] : [-4, -4]}
@@ -156,6 +158,29 @@ export const S6Ending: React.FC = () => {
             </g>
             <Sparkle x={130} y={300} size={30 * pop(frame, END + 12)} rotate={frame * 2} />
             <Sparkle x={950} y={640} size={26 * pop(frame, END + 15)} rotate={-frame * 2} color={C.coral} />
+            {frame >= YOURS ? (
+              <g>
+                <Display x={540} y={745} size={60} color={C.coralDeep} outline={C.white} ow={10} rotate={-2} scale={pop(frame, YOURS)}>
+                  What's YOUR Anshuman?
+                </Display>
+                {[
+                  { t: "new job?", x: 250, r: -7 },
+                  { t: "new city?", x: 540, r: 3 },
+                  { t: "big course?", x: 830, r: 8 },
+                ].map((card, i) => (
+                  <g key={card.t} transform={`translate(${card.x} 850) rotate(${card.r}) scale(${pop(frame, YOURS + 8 + i * 5)})`}>
+                    <rect x={-125} y={-52} width={250} height={104} rx={10} fill={C.white} stroke={C.ink} strokeWidth={5} />
+                    <line x1={-125} x2={125} y1={-20} y2={-20} stroke={C.coral} strokeWidth={3} />
+                    <text x={0} y={-28} textAnchor="middle" fontFamily="'Baloo 2', sans-serif" fontWeight={800} fontSize={20} letterSpacing={3} fill={C.coralDeep}>
+                      HYPOTHESIS
+                    </text>
+                    <Hand x={0} y={30} size={44} anchor="middle">
+                      {card.t}
+                    </Hand>
+                  </g>
+                ))}
+              </g>
+            ) : null}
           </g>
         ) : null}
       </Stage>
@@ -165,7 +190,7 @@ export const S6Ending: React.FC = () => {
 
 /** Sound cues for this scene (scene-relative frames). */
 export const S6_BEATS = () => {
-  const { c1, DUN, INTERRUPT, END } = beats();
+  const { c1, DUN, INTERRUPT, END, YOURS } = beats();
   return [
     { at: 0, file: "whoosh", vol: 0.5 },
     ...DUN.map((d) => ({ at: d, file: "thump", vol: 0.75 })),
@@ -174,6 +199,11 @@ export const S6_BEATS = () => {
     { at: INTERRUPT + 22, file: "pop", vol: 0.4 },
     { at: END, file: "whoosh", vol: 0.5 },
     { at: END + 8, file: "ding", vol: 0.45 },
+    { at: YOURS, file: "pop", vol: 0.45 },
+    { at: YOURS + 8, file: "pop", vol: 0.35 },
+    { at: YOURS + 13, file: "pop", vol: 0.35 },
+    { at: YOURS + 18, file: "pop", vol: 0.35 },
+    { at: INTERRUPT, file: "scratch", vol: 0.8 },
   ];
 };
 

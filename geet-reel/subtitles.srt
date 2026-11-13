@@ -1,75 +1,79 @@
 1
-00:00:00,167 --> 00:00:02,433
+00:00:00,167 --> 00:00:02,333
 We all love Geet from Jab We Met.
 
 2
-00:00:02,433 --> 00:00:04,100
+00:00:02,333 --> 00:00:03,933
 But I think we can agree,
 
 3
-00:00:04,100 --> 00:00:05,400
+00:00:03,933 --> 00:00:05,267
 girl desperately needed
 
 4
-00:00:05,400 --> 00:00:07,400
+00:00:05,267 --> 00:00:06,967
 a Life Design Lab lecture.
 
 5
-00:00:07,633 --> 00:00:10,533
+00:00:07,200 --> 00:00:10,033
 She planned to run away and marry Anshuman,
 
 6
-00:00:10,533 --> 00:00:13,033
+00:00:10,033 --> 00:00:12,300
 convinced she had her future figured out.
 
 7
-00:00:13,267 --> 00:00:14,267
+00:00:12,500 --> 00:00:13,533
 Except...
 
 8
-00:00:14,267 --> 00:00:16,033
+00:00:13,533 --> 00:00:15,267
 Anshuman was a hypothesis,
 
 9
-00:00:16,033 --> 00:00:17,233
+00:00:15,267 --> 00:00:16,467
 not a plan.
 
 10
-00:00:17,967 --> 00:00:21,233
+00:00:17,067 --> 00:00:20,267
 Life prototyping is about exploring a possible future
 
 11
-00:00:21,233 --> 00:00:22,933
+00:00:20,267 --> 00:00:21,933
 through small experiments,
 
 12
-00:00:22,933 --> 00:00:24,800
+00:00:21,933 --> 00:00:23,767
 so you can test assumptions
 
 13
-00:00:24,800 --> 00:00:26,633
+00:00:23,767 --> 00:00:25,467
 and learn before committing.
 
 14
-00:00:26,900 --> 00:00:30,000
+00:00:25,667 --> 00:00:28,600
 Geet could've started with a prototype conversation,
 
 15
-00:00:30,000 --> 00:00:32,500
+00:00:28,600 --> 00:00:31,000
 tried a low-stakes experience together,
 
 16
-00:00:32,500 --> 00:00:35,467
+00:00:31,000 --> 00:00:33,867
 and discovered if their plans actually matched.
 
 17
-00:00:35,900 --> 00:00:38,033
+00:00:34,100 --> 00:00:36,167
 Turns out, not every life decision
 
 18
-00:00:38,033 --> 00:00:40,600
+00:00:36,167 --> 00:00:38,667
 needs a dramatic Bollywood plot twist.
 
 19
-00:00:40,600 --> 00:00:43,333
+00:00:38,667 --> 00:00:41,333
 Sometimes, it just needs a prototype.
+
+20
+00:00:41,333 --> 00:00:43,433
+So... what's your Anshuman?
